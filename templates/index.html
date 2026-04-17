@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disease Risk Predictor</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- Animated Background -->
+    <div class="bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <!-- Main Application Container -->
+    <div class="app-container glass-panel">
+        
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="logo">
+                <i class="fa-solid fa-heart-pulse"></i>
+                <h2>MediPredict</h2>
+            </div>
+            <ul class="nav-links">
+                <li class="active" data-target="diabetes">
+                    <i class="fa-solid fa-staff-snake"></i> Diabetes
+                </li>
+                <li data-target="heart">
+                    <i class="fa-solid fa-heartbeat"></i> Heart Disease
+                </li>
+                <li data-target="parkinsons">
+                    <i class="fa-solid fa-brain"></i> Parkinson's
+                </li>
+                <li data-target="thyroid">
+                    <i class="fa-solid fa-crutch"></i> Thyroid
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="content">
+            <header>
+                <h1 id="disease-title">Diabetes Prediction</h1>
+                <p>Enter patient vitals to determine the estimated risk factor using advanced ML models.</p>
+            </header>
+
+            <div class="dashboard-grid">
+                <!-- Form Section -->
+                <section class="form-section">
+                    <form id="prediction-form">
+                        <div id="dynamic-inputs" class="inputs-grid">
+                            <!-- Inputs injected by JS -->
+                        </div>
+                        <button type="submit" class="btn-primary">
+                            <span>Analyze Patient Risk</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </form>
+                </section>
+
+                <!-- Visualization Section (Gauge) -->
+                <section class="results-section glass-panel-inner">
+                    <h2>Risk Assessment</h2>
+                    <div class="chart-container">
+                        <canvas id="riskGauge"></canvas>
+                    </div>
+                    
+                    <div id="result-text" class="result-box hidden">
+                        <h4 id="disease-name-display" style="color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px;"></h4>
+                        <h3 id="diagnosis">Diagnosis Pending</h3>
+                        <p id="probability-text">--%</p>
+                    </div>
+
+                    <div id="precautions-box" class="precautions-box hidden">
+                        <h4><i class="fa-solid fa-clipboard-list"></i> Recommended Precautions</h4>
+                        <ul id="precautions-list">
+                            <!-- Precautions injected here -->
+                        </ul>
+                    </div>
+                </section>
+            </div>
+            
+            <!-- Data Visualizations for Trained Models -->
+            <section id="insights-section" class="glass-panel-inner" style="margin-top: 2rem; display: none;">
+                <h2><i class="fa-solid fa-chart-bar"></i> Model Feature Insights</h2>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">Top features contributing to the Machine Learning model's predictions.</p>
+                <div style="position: relative; height: 300px; width: 100%;">
+                    <canvas id="importanceChart"></canvas>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Custom Script -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
